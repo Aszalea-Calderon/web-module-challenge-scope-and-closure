@@ -27,8 +27,10 @@ function processFirstItem(stringList, callback) {
  * Study the code for counter1 and counter2. Answer the questions below.
  * 
  * 1. What is the difference between counter1 and counter2?
+ * counter2 uses global scope rather than functional scope. Meaning it referencs things outside the function.
  * 
  * 2. Which of the two uses a closure? How can you tell?
+ *
  * 
  * 3. In what scenario would the counter1 code be preferable? In what scenario would counter2 be better? 
  *
@@ -56,10 +58,13 @@ function counter2() {
 
 Write a function called `inning` that returns a random number of points that a team scored in an inning. This should be a whole number between 0 and 2. */
 
-function inning(/*Code Here*/){
+//returns number of points that team score in an inning
+//It should be a whole number -- Math.round?
+//Math.floor(Math.random()*3);? try it out
 
-    /*Code Here*/
 
+function inning(){
+  return Math.floor(Math.random * 3);
 }
 
 /* Task 3: finalScore()
@@ -74,13 +79,59 @@ finalScore(inning, 9) might return:
   "Away": 5,
 }
 
-*/ 
+- function that recieves a inning, and number of innings
+- number is how many times the function ran
+- innings or func is the score
+- returns score in the object score
 
-function finalScore(/*code Here*/){
-
-  /*Code Here*/
+*/
+function finalScore(func,num){
+  let home= 0;
+  let away= 0;
+  for (let i = 0; i < num; i++){
+   home += func();
+   away += func();
+  }
+return {
+  Home: home,
+  Away: away,
+};
 
 }
+console.log(finalScore(inning, 9));
+
+
+
+// const score ={
+//   home: 0,
+//   away: 0,
+// };
+
+// function finalScore(func,num){
+//   for (let i = 0; i < num; i++){
+//    score.home +=func;
+//    score.away +=func;
+//   }
+// return score;
+// }
+// console.log(finalScore(inning, 9));
+
+// function finalScore(num, func){
+
+//   /*Code Here*/
+//   const home = {
+//     home: 0,
+//     away: 0,
+//   };
+  
+//   for( let i = 0; i <num; i++)
+//   if (i< num ){
+//     console.log(func)
+//   }
+
+// }
+
+
 
 /* Task 4: 
 
@@ -103,8 +154,22 @@ and returns the score at each pont in the game, like so:
 Final Score: awayTeam - homeTeam */
 
 
-function scoreboard(/* CODE HERE */) {
-  /* CODE HERE */
-}
+function scoreboard(inns, finalScore) {
+  const score = finalScore;
+  for (let i = 0; i < score; i++){                  //the purpose of the for loop is to go over things. 
+    let var1 = `Inning${i}: ${away} - ${home}`;     //[ i] is only for arrays
+    
+    getInningScore = 
+    console.log (`final Score: `)//away total and home total seperate?
+  }
+
+  return getInningScore;
+ }
+ console.log(scoreboard());
+
+
+
+
+//add score to final score for as many times as it loops
 
 
