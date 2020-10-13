@@ -30,10 +30,10 @@ function processFirstItem(stringList, callback) {
  * counter2 uses global scope rather than functional scope. Meaning it referencs things outside the function.
  * 
  * 2. Which of the two uses a closure? How can you tell?
- *
+ *function 1 uses closure becuase It has data that it uses within the function rather than just outside of the function
  * 
  * 3. In what scenario would the counter1 code be preferable? In what scenario would counter2 be better? 
- *
+ *counter 2 would be better if you need to be able to access the let count = 0 variable, it would be better used within a function. 1 would be easier to reuse on other things
 */
 
 // counter1 code
@@ -152,22 +152,61 @@ and returns the score at each pont in the game, like so:
 8th inning: awayTeam - homeTeam
 9th inning: awayTeam - homeTeam
 Final Score: awayTeam - homeTeam */
+//see below for better option
+function inning(){
+  return Math.floor(Math.random() *3);
+}
 
-
-function scoreboard(inns, finalScore) {
-  const score = finalScore;
-  for (let i = 0; i < score; i++){                  //the purpose of the for loop is to go over things. 
-    let var1 = `Inning${i}: ${away} - ${home}`;     //[ i] is only for arrays
-    
-    getInningScore = 
-    console.log (`final Score: `)//away total and home total seperate?
+function finalScore(func,num){
+  let home= 0;
+  let away= 0;
+  for (let i = 0; i < num; i++){
+   home += func();
+   away += func();
   }
+return {
+  Home: home,
+  Away: away,
+};
+}
 
-  return getInningScore;
- }
- console.log(scoreboard());
 
+// function scoreboard(inns, finalScore) {
+//   const score = finalScore;
+//   for (let i = 0; i < score; i++){                  //the purpose of the for loop is to go over things. 
+//     let var1 = `Inning${i}: ${away} - ${home}`;     //[ i] is only for arrays
+    
+//     getInningScore = 
+//     console.log (`final Score: `)//away total and home total seperate?
+//   }
 
+//   return getInningScore;
+//  }
+//  console.log(scoreboard());
+
+//This one is also valid and better.
+
+ function scoreboard(func, num) {
+  let gameScores = {
+    "Home": 0,
+    "Away": 0,
+  }
+  for (let i = 0; i < num; i++) {
+    gameScores.Home = gameScores.Home + func();
+    gameScores.Away = gameScores.Away + func();
+    if (i===0){
+      console.log(`${i+1}st inning: ${gameScores.Home}-${gameScores.Away}`);
+    }else if(i===1){
+      console.log(`${i+1}nd inning: ${gameScores.Home}-${gameScores.Away}`);
+    }else if(i===2){
+      console.log(`${i+1}rd inning: ${gameScores.Home}-${gameScores.Away}`);
+    }else{
+      console.log(`${i+1}th inning: ${gameScores.Home}-${gameScores.Away}`);
+    }
+  }
+  console.log(`Final Score : ${gameScores.Home} - ${gameScores.Away}`)
+}
+console.log(scoreboard(inning, 4)) 
 
 
 //add score to final score for as many times as it loops
